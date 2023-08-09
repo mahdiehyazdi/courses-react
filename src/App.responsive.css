@@ -1,0 +1,98 @@
+@media only screen and (min-device-width: 300px) and (max-device-width: 460px) {
+    .product {
+        display: grid;
+    }
+    .product__list {
+        display: grid;
+        margin: 10px;
+        gap: 15px;
+    }
+    .description {
+        width: auto;
+    }
+    .product__list div {
+        width: auto;
+    }
+    .product__filter {
+        border: none;
+        width: 25%;
+    }
+    .product__filter__item,
+    .product__filter__item div,
+    .product__filter__item label {
+        font-size: 0.8rem;
+        display: flex;
+        margin-left: 0.5rem;
+        padding: 0;
+    }
+    .product__filter input[type="radio"] {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+    h2 {
+        font-size: 0.8rem;
+    }
+}
+@media only screen and (min-device-width: 460px) and (max-device-width: 740px) {
+    .product {
+        display: grid;
+    }
+    .description {
+        width: auto;
+    }
+    .product__filter__item,
+    .product__filter__item div,
+    .product__filter__item label {
+        font-size: 0.8rem;
+        display: flex;
+        margin-left: 0.5rem;
+        padding: 0;
+    }
+    .product__filter {
+        border: none;
+        width: 25%;
+    }
+    h2 {
+        font-size: 0.9rem;
+    }
+    .product__score {
+        margin: 0;
+    }
+    #product__tags {
+        display: contents;
+        font-size: 0.47rem;
+    }
+    #product__tags div {
+        justify-content: center;
+    }
+    .product__list div {
+        height: auto;
+        margin-bottom: 15px;
+    }
+}
+@media only screen and (min-device-width: 740px) and (max-device-width: 780px) {
+    h2 {
+        font-size: 1rem;
+    }
+    #product__tags {
+        display: contents;
+        font-size: 0.8rem;
+    }
+    #product__tags div {
+        justify-content: center;
+    }
+    .product__list div {
+        height: auto;
+        margin-bottom: 15px;
+    }
+    .product__filter__item {
+        font-size: 0.6rem;
+    }
+    .product__filter__item div {
+        display: flex;
+        align-items: center;
+    }
+    .product__score {
+        margin: 7px;
+    }
+}
