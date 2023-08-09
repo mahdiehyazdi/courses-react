@@ -1,0 +1,24 @@
+name: Courses_React
+
+on:
+    repository_dispatch:
+        types: [deploy_updated_workflow]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Run the actions/checkout
+              uses: actions/checkout@722adc6
+
+            - name: Deploy GHA to WN-SDK-TEMPORARY
+              uses: MikeHamilton-RW/deploy-common-actions@v1.0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+                  USER: "my-user-name-or-organization"
+                  REPOSITORY: "my-repo"
+                  DEVELOPMENT_BRANCH: "develop"
+                  GHA_DEPLOYMENT_FOLDER: "gha-source"
+                  COMMIT_MESSAGE: "Deploy new Github Action"
+                  GHA_DEPLOY_BRANCH_NAME: "my_new_yaml_script_branch"
