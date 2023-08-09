@@ -1,42 +1,49 @@
-name: Courses_react
+name: Deploy
 
-on: [push]
+on:
+    push:
+        branches:
+            - main
 
 jobs:
-    deploy:
-        name: Deploy my app
-
+    build:
+        name: Build
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v1
+            - name: Checkout repo
+              uses: actions/checkout@v3
 
-            - uses: chrnorm/deployment-action@v2
-              name: Create GitHub deployment
-              id: deployment
+            - name: Setup Node
+              uses: actions/setup-node@v3
+
+            - name: Install dependencies
+              uses: bahmutov/npm-install@v1
+
+            - name: Build project
+              run: npm run build
+
+            - name: Upload production-ready build files
+              uses: actions/upload-artifact@v3
               with:
-                  token: "${{ github.token }}"
-                  environment-url: http://my-app-url.com
-                  environment: production
+                  name: production-files
+                  path: ./dist
 
-            - name: Deploy my app
-              run: |
-                  # add your deployment code here
+    deploy:
+        name: Deploy
+        needs: build
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
 
-            - name: Update deployment status (success)
-              if: success()
-              uses: chrnorm/deployment-status@v2
+        steps:
+            - name: Download artifact
+              uses: actions/download-artifact@v3
               with:
-                  token: "${{ github.token }}"
-                  environment-url: ${{ steps.deployment.outputs.environment_url }}
-                  deployment-id: ${{ steps.deployment.outputs.deployment_id }}
-                  state: "success"
+                  name: production-files
+                  path: ./dist
 
-            - name: Update deployment status (failure)
-              if: failure()
-              uses: chrnorm/deployment-status@v2
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
               with:
-                  token: "${{ github.token }}"
-                  environment-url: ${{ steps.deployment.outputs.environment_url }}
-                  deployment-id: ${{ steps.deployment.outputs.deployment_id }}
-                  state: "failure"
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist
