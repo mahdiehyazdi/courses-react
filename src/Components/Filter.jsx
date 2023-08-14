@@ -4,10 +4,10 @@ export default function Filter() {
         <div>
             <h4>FILTER</h4>
             <div className="product__filter__item">
-                {filters.map((filter) => {
+                {filters.map((filter, index) => {
                     return (
-                        <div key={filter}>
-                            <input type="radio" checked="checked" name="radio" />
+                        <div key={index}>
+                            <input type="radio" defaultChecked={index === 0} name="radio" />
                             <span className="checkmark"></span>
                             <label>{filter} </label>
                         </div>

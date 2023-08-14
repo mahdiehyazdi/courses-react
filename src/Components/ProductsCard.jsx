@@ -21,7 +21,7 @@ export default function ProductsCard({ course }) {
 function Score({ rate }) {
     return (
         <div className="product__score">
-            <img src="/Svg/star.svg" />
+            <img src="Svg/star.svg" />
             <strong>{rate}</strong>
         </div>
     );
